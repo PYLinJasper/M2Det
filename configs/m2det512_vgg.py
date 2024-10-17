@@ -12,7 +12,7 @@ model = dict(
         num_scales = 6,
         sfam = False,
         smooth = True,
-        num_classes = 81,
+        num_classes = 2,
         ),
     rgb_means = (104, 117, 123),
     p = 0.6,
@@ -65,13 +65,14 @@ dataset = dict(
         eval_sets = [('2007', 'test')],
         ),
     COCO = dict(
-        train_sets = [('2014', 'train'), ('2014', 'valminusminival')],
-        eval_sets = [('2014', 'minival')],
-        test_sets = [('2015', 'test-dev')],
+        train_sets = [('custom', 'all_pos_train')],
+        eval_sets = [('custom', 'all_pos_val')],
+        test_sets = [('custom', 'all_pos_test')],
         )
     )
 
 import os
-home = os.path.expanduser("~")
-VOCroot = os.path.join(home,"data/VOCdevkit/")
-COCOroot = os.path.join(home,"data/coco/")
+# home = os.path.expanduser("~")
+home = "/content/drive/MyDrive/"
+# VOCroot = os.path.join(home,"data/VOCdevkit/")
+COCOroot = os.path.join(home,"fpn/data/64_32/range/pos/")

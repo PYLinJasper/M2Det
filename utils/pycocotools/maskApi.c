@@ -41,10 +41,18 @@ void rleEncode( RLE *R, const byte *M, siz h, siz w, siz n ) {
 }
 
 void rleDecode( const RLE *R, byte *M, siz n ) {
-  siz i, j, k; for( i=0; i<n; i++ ) {
-    byte v=0; for( j=0; j<R[i].m; j++ ) {
-      for( k=0; k<R[i].cnts[j]; k++ ) *(M++)=v; v=!v; }}
+  siz i, j, k;
+  for( i = 0; i < n; i++ ) {
+    byte v = 0;
+    for( j = 0; j < R[i].m; j++ ) {
+      for( k = 0; k < R[i].cnts[j]; k++ ) {
+        *(M++) = v;  // Set the value
+      }
+      v = !v;  // Toggle the value
+    }
+  }
 }
+
 
 void rleMerge( const RLE *R, RLE *M, siz n, int intersect ) {
   uint *cnts, c, ca, cb, cc, ct; int v, va, vb, vp;

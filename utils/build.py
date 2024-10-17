@@ -137,7 +137,7 @@ ext_modules = [
               ),
     Extension(
         'pycocotools._mask',
-        sources=['pycocotools/maskApi.c', 'pycocotools/_mask.pyx'],
+        sources=['pycocotools/_mask.pyx'],
         include_dirs=[numpy_include, 'pycocotools'],
         extra_compile_args={
             'gcc': ['-Wno-cpp', '-Wno-unused-function', '-std=c99']},

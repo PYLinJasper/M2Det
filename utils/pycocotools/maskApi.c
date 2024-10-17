@@ -170,8 +170,16 @@ void rleFrPoly( RLE *R, const double *xy, siz k, siz h, siz w ) {
   /* upsample and get discrete points densely along entire boundary */
   siz j, m=0; double scale=5; int *x, *y, *u, *v; uint *a, *b;
   x=malloc(sizeof(int)*(k+1)); y=malloc(sizeof(int)*(k+1));
-  for(j=0; j<k; j++) x[j]=(int)(scale*xy[j*2+0]+.5); x[k]=x[0];
-  for(j=0; j<k; j++) y[j]=(int)(scale*xy[j*2+1]+.5); y[k]=y[0];
+    for (j = 0; j < k; j++) {
+      x[j] = (int)(scale * xy[j * 2 + 0] + .5);
+    }
+    x[k] = x[0];  // This line is now clearly outside the loop
+
+    for (j = 0; j < k; j++) {
+      y[j] = (int)(scale * xy[j * 2 + 1] + .5);
+    }
+    y[k] = y[0];  // This line is now clearly outside the loop
+      
   for(j=0; j<k; j++) m+=umax(abs(x[j]-x[j+1]),abs(y[j]-y[j+1]))+1;
   u=malloc(sizeof(int)*m); v=malloc(sizeof(int)*m); m=0;
   for( j=0; j<k; j++ ) {

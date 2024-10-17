@@ -8,7 +8,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-uint umin( uint a, uint b ) { return (a<b) ? a : b; }
+static uint umin( uint a, uint b ) { return (a<b) ? a : b; }
 uint umax( uint a, uint b ) { return (a>b) ? a : b; }
 
 void rleInit( RLE *R, siz h, siz w, siz m, uint *cnts ) {

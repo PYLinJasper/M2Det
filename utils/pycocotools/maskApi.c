@@ -235,16 +235,42 @@ char* rleToString( const RLE *R ) {
 }
 
 void rleFrString( RLE *R, char *s, siz h, siz w ) {
-  siz m=0, p=0, k; long x; int more; uint *cnts;
-  while( s[m] ) m++; cnts=malloc(sizeof(uint)*m); m=0;
-  while( s[p] ) {
-    x=0; k=0; more=1;
-    while( more ) {
-      char c=s[p]-48; x |= (c & 0x1f) << 5*k;
-      more = c & 0x20; p++; k++;
-      if(!more && (c & 0x10)) x |= -1 << 5*k;
-    }
-    if(m>2) x+=(long) cnts[m-2]; cnts[m++]=(uint) x;
+  siz m = 0, p = 0, k;
+  long x;
+  int more;
+  uint *cnts;
+
+  // Fix the while loop to allocate memory after it finishes
+  while (s[m]) {
+      m++;
   }
-  rleInit(R,h,w,m,cnts); free(cnts);
+  cnts = malloc(sizeof(uint) * m);
+  m = 0;
+
+  // Process the string
+  while (s[p]) {
+    x = 0;
+    k = 0;
+    more = 1;
+    while (more) {
+      char c = s[p] - 48;
+      x |= (c & 0x1f) << 5 * k;
+      more = c & 0x20;
+      p++;
+      k++;
+      if (!more && (c & 0x10)) {
+        x |= -1 << 5 * k;
+      }
+    }
+
+    // Fix the if clause to properly handle the condition and the statement outside
+    if (m > 2) {
+        x += (long) cnts[m - 2];
+    }
+    cnts[m++] = (uint) x;
+  }
+
+  // Initialize RLE and free the allocated memory
+  rleInit(R, h, w, m, cnts);
+  free(cnts);
 }

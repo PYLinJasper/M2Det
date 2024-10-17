@@ -1,5 +1,7 @@
 from __future__ import print_function
 import os
+# Disable XLA to avoid the cuFFT, cuDNN, and cuBLAS registration errors
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices=false'
 import warnings
 warnings.filterwarnings('ignore')
 

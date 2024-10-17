@@ -224,7 +224,11 @@ char* rleToString( const RLE *R ) {
     x=(long) R->cnts[i]; if(i>2) x-=(long) R->cnts[i-2]; more=1;
     while( more ) {
       char c=x & 0x1f; x >>= 5; more=(c & 0x10) ? x!=-1 : x!=0;
-      if(more) c |= 0x20; c+=48; s[p++]=c;
+        if (more) {
+            c |= 0x20;
+        }
+        c += 48;
+        s[p++] = c;
     }
   }
   s[p]=0; return s;
